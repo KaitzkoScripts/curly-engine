@@ -12,6 +12,15 @@ function notify(title, text)
     })
 end
 
+notify("Important", "Before using any keys you have to hold them and click first")
+task.wait(3)
+notify("Record Start Keybind", "Press the . key to start recording")
+notify("Record End Keybind", "Press the Enter key to stop recording")
+notify("Mark safe tile keybind", "Press the left control key to mark a safe tile")
+notify("Clear all marked tiles keybind", "Press the right control key to clear all marked tiles")
+notify("Clear specific tile keybind", "Press the backspace key to clear a specific tile")
+notify("Play recording keybind", "Press the left or right bracket key to play recording")
+
 m.Button1Down:Connect(function()
     if (uis:IsKeyDown(Enum.KeyCode.LeftControl) and string.find(m.Target.Name, "Tile")) then
         m.Target.BrickColor = BrickColor.new("Forest green")
