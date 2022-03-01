@@ -34,6 +34,7 @@ m.Button1Down:Connect(function()
         m.Target.Color = Color3.fromRGB(198, 237, 255)
     elseif uis:IsKeyDown(Enum.KeyCode.Period) then
         notify("Recording", "Started recording")
+        workspace.CurrentCamera.CFrame = CFrame.new(269.913239, 2000.59607, -144.617981, 0, -0.258818537, 0.965925992, 0, 0.965925992, 0.258818537, -1, 0, 0)
         game.Players.LocalPlayer.Character.HumanoidRootPart:PivotTo(CFrame.new(264.93808, 1995.86084, -147.131821, 0, 0, 1, 0, 1, 0, -1, 0, 0))
         vu:StartRecording()
     elseif uis:IsKeyDown(Enum.KeyCode.Return) then
@@ -46,6 +47,7 @@ m.Button1Down:Connect(function()
             notify("No recording", "You have not recorded yet!")
             return
         else
+            workspace.CurrentCamera.CFrame = CFrame.new(269.913239, 2000.59607, -144.617981, 0, -0.258818537, 0.965925992, 0, 0.965925992, 0.258818537, -1, 0, 0)
             game.Players.LocalPlayer.Character.HumanoidRootPart:PivotTo(CFrame.new(264.93808, 1995.86084, -147.131821, 0, 0, 1, 0, 1, 0, -1, 0, 0))
             loadstring(tostring(vuscript))()
         end
