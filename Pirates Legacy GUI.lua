@@ -68,18 +68,19 @@ function youwillneverreachthetruth()
             break
         end
         repeat
-            for i,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+            for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
                 if v.Name == theywannakill then
                     break
                 end
             end
             task.wait()
         until true
-        for i,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
             if (v.Name == theywannakill) then
-                task.spawn(wedoalittlefunny, v)
+                coroutine.wrap(wedoalittlefunny)(v)
             end
         end
+        break
     end
 end
 
