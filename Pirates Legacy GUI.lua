@@ -20,7 +20,7 @@ function wellokaythen()
             break
         end
         task.wait()
-        for i,v in ipairs(game:GetService("Players"):GetChildren()) do
+        for _,v in ipairs(game:GetService("Players"):GetChildren()) do
             if v.Character ~= game.Players.LocalPlayer.Character then
                 bozo[4] = v.Character
                 game:GetService("ReplicatedStorage").Remotes.ServerHandler:FireServer(unpack(bozo))
@@ -44,7 +44,7 @@ end
 function hedoesthebreakdance(omgheis)
     repeat
         bozo[4] = omgheis.Character
-        if uhtheymightbedead(omgheis.Character) == true or STOPITBREAK == true then
+        if (uhtheymightbedead(omgheis.Character) == true or STOPITBREAK == true) then
             break
         end
         task.wait()
@@ -67,14 +67,14 @@ function youwillneverreachthetruth()
         if not shared.istoggled then
             break
         end
-        repeat
+        while true do
             for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
                 if v.Name == theywannakill then
                     break
                 end
             end
             task.wait()
-        until true
+        end
         for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
             if (v.Name == theywannakill) then
                 coroutine.wrap(wedoalittlefunny)(v)
@@ -103,7 +103,7 @@ end)
 b:Button("Kill Player",function()
     for i,v in ipairs(game:GetService("Players"):GetChildren()) do
         if (v.DisplayName == ptk or v.Name == ptk) then
-            task.spawn(hedoesthebreakdance, v)
+            coroutine.wrap(hedoesthebreakdance)(v)
             break
         end
     end
@@ -146,7 +146,7 @@ end)
 a:Toggle("AutoFarm",function(bool)
     shared.istoggled = bool
     if shared.istoggled then
-        task.spawn(youwillneverreachthetruth)
+        coroutine.wrap(youwillneverreachthetruth)()
     end
 end)
 
