@@ -3,6 +3,7 @@ local uis = game:GetService("UserInputService")
 local vu = game:GetService("VirtualUser")
 local vuscript = nil
 local bruh = {}
+local am = {}
 
 function notify(title, text)
     game.StarterGui:SetCore("SendNotification", {
@@ -25,6 +26,33 @@ task.wait(1)
 notify("Clear specific tile keybind", "Press the backspace key to clear a specific tile")
 task.wait(1)
 notify("Play recording keybind", "Press the left or right bracket key to play recording")
+
+coroutine.wrap(function()
+    for _,v in pairs(workspace.Map.Game.Tiles:GetDescendants()) do
+        if (string.find(v.Name, "Tile") and v:IsA("Part")) then
+            local tilemark = Instance.new("Part")
+            tilemark.Size = v.Size
+            tilemark.Transparency = 1
+            tilemark.Position = v.Position + Vector3.new(0, -4, 0)
+            tilemark.Parent = workspace
+            am[v] = tilemark
+            tilemark.Touched:Connect(function(otherpart)
+                if (otherpart:FindFirstAncestorWhichIsA("Model") and game.Players:GetPlayerFromCharacter(otherpart) and (game.Players:GetPlayerFromCharacter(otherpart) == game.Players.LocalPlayer)) then
+                    v.Color = Color3.fromRGB(198, 237, 255)
+                end
+            end)
+        end
+    end
+end)()
+coroutine.wrap(function()
+    for i,_ in ipairs(am) do
+        i.Touched:Connect(function(otherpart)
+            if (otherpart:FindFirstAncestorWhichIsA("Model") and game.Players:GetPlayerFromCharacter(otherpart) and (game.Players:GetPlayerFromCharacter(otherpart) == game.Players.LocalPlayer)) then
+                i.BrickColor = BrickColor.new("Forest green")
+            end
+        end)
+    end
+end)()
 
 m.Button1Down:Connect(function()
     if (uis:IsKeyDown(Enum.KeyCode.LeftControl) and string.find(m.Target.Name, "Tile")) then
