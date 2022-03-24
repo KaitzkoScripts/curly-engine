@@ -33,8 +33,7 @@ coroutine.wrap(function()
             local tilemark = Instance.new("Part")
             tilemark.Size = v.Size
             tilemark.Transparency = 1
-            tilemark.Anchored = true
-            tilemark:PivotTo(v.CFrame * CFrame.new(0, -4, 0))
+            tilemark.Position = v.Position + Vector3.new(0, -4, 0)
             tilemark.Parent = workspace
             am[v] = tilemark
             tilemark.Touched:Connect(function(otherpart)
