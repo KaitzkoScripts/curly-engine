@@ -34,7 +34,7 @@ function zamntheydobelookingfine()
     STOPITBREAK = false
 end
 function uhtheymightbedead(arethey)
-    bruhwhat = string.split(arethey:WaitForChild("Head", 5).Overhead.Background.HealthAmount.Text, "/")
+    bruhwhat = string.split(arethey:WaitForChild("Head", math.huge).Overhead.Background.HealthAmount.Text, "/")
     if tonumber(bruhwhat[1]) == 0 then
         return true
     else
