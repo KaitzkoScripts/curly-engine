@@ -2,8 +2,13 @@ local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/St
 local helledppl = {}
 local picked = nil
 local usingmouse = false
-local qwerty = false
 local m = game.Players.LocalPlayer:GetMouse()
+local invispart = Instance.new("Part")
+invispart.Material = Enum.Material.ForceField
+invispart.Position = Vector3.new(350, -26, 11)
+invispart.Size = Vector3.new(34, 0.1, 34)
+invispart.Anchored = true
+invispart.Parent = workspace
 
 math.randomseed(tick())
 
@@ -34,8 +39,21 @@ local win = SolarisLib:New({
 local tab = win:Tab("Fun")
 local misc = win:Tab("Misc")
 local sec2 = misc:Section("Misc stuff")
-local antiragdoll = sec2:Toggle("Anti-Ragdoll", false, "Toggle", function(omgiforgotthearg)
-    qwerty = omgiforgotthearg
+local antiragdoll = sec2:Toggle("Anti-Ragdoll", false, "Toggle", function(ard)
+    while ard do
+        task.wait(1)
+        game.Players.LocalPlayer.Character.Humanoid.RagdollRemoteEvent:FireServer(false)
+    end
+end)
+local invis = sec2:Button("Invisible", function()
+    local lastpos = game.Players.LocalPlayer.Character.HumanoidRootPart:GetPivot()
+    game.Players.LocalPlayer.Character.HumanoidRootPart:PivotTo(invispart:GetPivot())
+    task.wait(2)
+    local rclone = game.Players.LocalPlayer.Character.LowerTorso.Root:Clone()
+    game.Players.LocalPlayer.Character.LowerTorso.Root:Destroy()
+    task.wait(.317)
+    rclone.Parent = game.Players.LocalPlayer.Character.LowerTorso
+    game.Players.LocalPlayer.Character.HumanoidRootPart:PivotTo(lastpos)
 end)
 local sec = tab:Section("Have fun trolling")
 local lab = sec:Label("Picked Player: None")
@@ -95,16 +113,6 @@ game.Players.PlayerAdded:Connect(function(zaplayer)
     end
 end)
 
-coroutine.wrap(function()
-    while true do
-        task.wait()
-        repeat task.wait() until qwerty == true
-        while qwerty do
-            task.wait(1.37)
-            game.Players.LocalPlayer.Character.Humanoid.RagdollRemoteEvent:FireServer(false)
-        end
-    end
-end)()
 coroutine.wrap(function()
     task.wait(5)
     delfolder("/RP_Stuff")
