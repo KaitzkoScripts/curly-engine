@@ -2,6 +2,7 @@ local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/St
 local helledppl = {}
 local picked = nil
 local usingmouse = false
+local ard_toggle = false
 local m = game.Players.LocalPlayer:GetMouse()
 
 math.randomseed(tick())
@@ -33,6 +34,13 @@ local win = SolarisLib:New({
 local tab = win:Tab("Fun")
 local misc = win:Tab("Misc")
 local sec2 = misc:Section("Misc stuff")
+local antiragdoll = sec2:Toggle("Anti-Ragdoll", false, "Toggle", function()
+    ard_toggle = ard
+    while ard_toggle do
+        task.wait(1)
+        game.Players.LocalPlayer.Character.Humanoid.RagdollRemoteEvent:FireServer(false)
+    end
+end)
 local sec = tab:Section("Have fun trolling")
 local lab = sec:Label("Picked Player: None")
 local viewplr = sec:Button("View Player", function()
