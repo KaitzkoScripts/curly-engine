@@ -100,7 +100,7 @@ coroutine.wrap(function()
         task.wait()
         repeat task.wait() until qwerty == true
         while qwerty do
-            task.wait(1)
+            task.wait(2)
             game.Players.LocalPlayer.Character.Humanoid.RagdollRemoteEvent:FireServer(false)
         end
     end
