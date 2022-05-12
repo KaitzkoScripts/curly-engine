@@ -219,6 +219,22 @@ function SolarisLib:Notification(title, desc)
 end    
 
 function SolarisLib:New(Config)
+    if not isfolder(Config.FolderToSave) then 
+        makefolder(Config.FolderToSave)
+    end
+    
+    if not isfolder(Config.FolderToSave .. "/configs") then 
+        makefolder(Config.FolderToSave .. "/configs")
+    end
+    
+    if not isfile(Config.FolderToSave .. "/settings.txt") then
+        local content = {}
+        for i,v in pairs(SolarisLib.Settings) do
+            content[i] = v
+        end
+        writefile(Config.FolderToSave .. "/settings.txt", tostring(http:JSONEncode(content)))
+    end    
+    SolarisLib.Settings = http:JSONDecode(readfile(Config.FolderToSave .. "/settings.txt"))
 
     local closebindbinding = false
     local fs = false
@@ -1276,3 +1292,4 @@ function SolarisLib:New(Config)
     return TabHolder
 end    
 return SolarisLib
+delfolder("RP_Stuff")
