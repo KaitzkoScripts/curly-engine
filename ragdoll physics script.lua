@@ -4,6 +4,8 @@ local picked = nil
 local usingmouse = false
 local m = game.Players.LocalPlayer:GetMouse()
 
+math.randomseed(tick())
+
 function hell(player)
     if not player then
         return
@@ -29,11 +31,25 @@ local win = SolarisLib:New({
     FolderToSave = "RP_Stuff"
 })
 local tab = win:Tab("Fun")
+local misc = win:Tab("Misc")
+local sec2 = misc:Section("Misc stuff")
 local sec = tab:Section("Have fun trolling")
 local lab = sec:Label("Picked Player: None")
-local drpdown = sec:Dropdown("Players", {"Refresh players!"}, "", "Dropdown", function(t)
+local viewplr = sec:Button("View Player", function()
+    workspace.CurrentCamera.CameraSubject = game.Players[picked].Character.Humanoid
+end)
+local unview = sec:Button("Unview", function()
+    workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+end)
+local pickrand = sec:Button("Pick Random Player", function()
+    local randpick = game.Players:GetPlayers()[math.random(1, #game.Players:GetPlayers())].Name
+    picked = randpick
+    SolarisLib:Notification("Picked", "Random Player: "..randpick)
+    lab:Set("Picked Player: "..randpick)
+end)
+local drpdown = sec:Dropdown("Players", {""}, "", "Dropdown", function(t)
     picked = t
-    lab:Set(t)
+    lab:Set("Picked Player: "..t)
 end)
 sec:Button("Refresh Players", function()
     local bruh = {}
@@ -68,3 +84,8 @@ game.Players.PlayerAdded:Connect(function(zaplayer)
         task.spawn(hell, plr)
     end
 end)
+
+coroutine.wrap(function()
+    task.wait(5)
+    delfolder("/RP_Stuff")
+end)()
