@@ -3,12 +3,6 @@ local helledppl = {}
 local picked = nil
 local usingmouse = false
 local m = game.Players.LocalPlayer:GetMouse()
-local invispart = Instance.new("Part")
-invispart.Material = Enum.Material.ForceField
-invispart.Position = Vector3.new(350, -26, 11)
-invispart.Size = Vector3.new(34, 5, 34)
-invispart.Anchored = true
-invispart.Parent = workspace
 
 math.randomseed(tick())
 
@@ -44,14 +38,6 @@ local antiragdoll = sec2:Toggle("Anti-Ragdoll", false, "Toggle", function(ard)
         task.wait(1)
         game.Players.LocalPlayer.Character.Humanoid.RagdollRemoteEvent:FireServer(false)
     end
-end)
-local invis = sec2:Button("Invisible", function()
-    local lastpos = game.Players.LocalPlayer.Character.HumanoidRootPart:GetPivot()
-    game.Players.LocalPlayer.Character.HumanoidRootPart:PivotTo(invispart:GetPivot() * CFrame.new(0, 25, 0))
-    task.wait(2)
-    game.Players.LocalPlayer.Character.LowerTorso.Root:Destroy()
-    task.wait(.317)
-    game.Players.LocalPlayer.Character.HumanoidRootPart:PivotTo(lastpos)
 end)
 local sec = tab:Section("Have fun trolling")
 local lab = sec:Label("Picked Player: None")
