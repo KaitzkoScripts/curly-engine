@@ -25,7 +25,8 @@ function hell(player)
 end
 
 local win = SolarisLib:New({
-    Name = "Ragdoll Physics"
+    Name = "Ragdoll Physics",
+    FolderToSave = "RP_Stuff"
 })
 local tab = win:Tab("Fun")
 local sec = tab:Section("Have fun trolling")
