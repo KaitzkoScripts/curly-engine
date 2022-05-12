@@ -51,12 +51,17 @@ local drpdown = sec:Dropdown("Players", {""}, "", "Dropdown", function(t)
     picked = t
     lab:Set("Picked Player: "..t)
 end)
+local bruh = {}
+for _,v in pairs(game.Players:GetPlayers()) do
+table.insert(bruh, v.Name)
+end
+drpdown:Refresh(bruh, true)
 sec:Button("Refresh Players", function()
     local bruh = {}
     for _,v in pairs(game.Players:GetPlayers()) do
         table.insert(bruh, v.Name)
     end
-    drpdown:Set(bruh)
+    drpdown:Refresh(bruh, true)
 end)
 sec:Button("Fling Picked Player", function()
     if picked == nil then
@@ -74,6 +79,7 @@ m.Button1Down:Connect(function()
         local ratio = game.Players:GetPlayerFromCharacter(m.Target:FindFirstAncestorOfClass("Model"))
         if ratio then
             picked = ratio.Name
+            SolarisLib:Notification("Picked", "Picked "..ratio.Name)
             lab:Set("Picked Player: "..ratio.Name)
         end
     end
